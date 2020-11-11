@@ -18,6 +18,10 @@ namespace LexiconLMS.Models
 
         public DateTime? EndDate { get; set; }
 
-
+        //Foreign Key
+        public int ModuleId { get; set; }
+        //Navigation property
+        public virtual ICollection<Activities> Activities { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }

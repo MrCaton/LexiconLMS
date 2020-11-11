@@ -9,7 +9,7 @@ namespace LexiconLMS.Models
     {
         public int Id { get; set; }
 
-        public ActivityTypeEnum ActivityType { get; set; }
+        //public ActivityType ActivityType { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime StartTime { get; set; }
@@ -19,7 +19,8 @@ namespace LexiconLMS.Models
         public bool Deadline { get; set; }
         // Foreign key
         public int CourseId { get; set; }
+        public int ActivityTypeId { get; set; }
         // Navigation property
-        public virtual Course Course { get; set; }                
+        public virtual Document Document { get; set; }                
     }
 }
