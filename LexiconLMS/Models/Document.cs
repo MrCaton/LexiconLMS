@@ -11,7 +11,7 @@ namespace LexiconLMS.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime dateCreated{ get; set;}
-        public int? GroupId { get; set; }
+        public int? CourseId { get; set; }
         
     }
 }

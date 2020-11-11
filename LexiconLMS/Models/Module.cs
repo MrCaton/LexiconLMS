@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LexiconLMS.Models
 {
-    public class Group
+    public class Module
     {
 
         public int Id { get; set; }

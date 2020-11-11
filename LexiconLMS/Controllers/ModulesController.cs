@@ -10,11 +10,11 @@ using LexiconLMS.Models;
 
 namespace LexiconLMS.Controllers
 {
-    public class GroupsController : Controller
+    public class ModulesController : Controller
     {
         private readonly LexiconLMSContext _context;
 
-        public GroupsController(LexiconLMSContext context)
+        public ModulesController(LexiconLMSContext context)
         {
             _context = context;
         }
@@ -54,7 +54,7 @@ namespace LexiconLMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate")] Group @group)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate")] Module @group)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace LexiconLMS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,StartDate,EndDate")] Group @group)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,StartDate,EndDate")] Module @group)
         {
             if (id != @group.Id)
             {
