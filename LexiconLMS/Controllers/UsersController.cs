@@ -7,22 +7,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LexiconLMS.Data;
 using LexiconLMS.Models;
+using LexiconLMS.ModelsViewModels;
+//using LexiconLMS.Models.ViewModels;
 
 namespace LexiconLMS.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly LexiconLMSContext _context;
+        private readonly LexiconLMSContext db;
 
-        public UsersController(LexiconLMSContext context)
+        public UsersController(LexiconLMSContext db)
         {
-            _context = context;
+            this.db = db;
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+            var model = db.User
+                .Include(s => s.Courses)
+                .Select(s => new UserListViewModel
+                {
+                    Id = s.Id
+            //        FirstName=sbyte.FirstName
+
+                });
+            return View(await db.User.ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -33,7 +43,7 @@ namespace LexiconLMS.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await db.User
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -58,8 +68,8 @@ namespace LexiconLMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+                db.Add(user);
+                await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -73,7 +83,7 @@ namespace LexiconLMS.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
+            var user = await db.User.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -97,8 +107,8 @@ namespace LexiconLMS.Controllers
             {
                 try
                 {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
+                    db.Update(user);
+                    await db.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +134,7 @@ namespace LexiconLMS.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await db.User
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -139,15 +149,15 @@ namespace LexiconLMS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
+            var user = await db.User.FindAsync(id);
+            db.User.Remove(user);
+            await db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return db.User.Any(e => e.Id == id);
         }
     }
 }
