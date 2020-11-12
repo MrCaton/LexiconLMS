@@ -12,6 +12,11 @@ namespace LexiconLMS.Models
         public string Description { get; set; }
         public DateTime dateCreated{ get; set;}
         public int? CourseId { get; set; }
-        
+
+        //Foreign Key
+        public int CourseId { get; set; }
+        //public int UserId { get; set; }
+        public int ModuleId { get; set; }
+        public int ActivityId { get; set; }
     }
 }

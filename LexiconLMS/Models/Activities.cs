@@ -16,7 +16,6 @@ namespace LexiconLMS.Models
 
         public DateTime EndTime { get; set; }
 
-        public bool Deadline { get; set; }
         // Foreign key
         public int CourseId { get; set; }
         public int ActivityTypeId { get; set; }
