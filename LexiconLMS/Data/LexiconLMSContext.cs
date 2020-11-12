@@ -19,5 +19,7 @@ namespace LexiconLMS.Data
         public DbSet<LexiconLMS.Models.Course> Course { get; set; }
 
         public DbSet<LexiconLMS.Models.Module> Group { get; set; }
+
+        public DbSet<LexiconLMS.Models.User> User { get; set; }
     }
 }
